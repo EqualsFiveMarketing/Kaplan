@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Horizon 1 — ABM&S 18-Month Master Schedule</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -54,7 +55,7 @@ h1 span{color:var(--pink);}
 .team-legend{display:flex;gap:10px;align-items:center;padding:6px 32px;border-bottom:2px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);flex-wrap:wrap;}
 
 /* SCHEDULE CONTAINER */
-.schedule{overflow-x:auto;overflow-y:visible;}
+.schedule{overflow:visible;}
 .inner{min-width:2600px;}
 
 /* STICKY HEADERS */
@@ -1392,6 +1393,28 @@ h1 span{color:var(--pink);}
   window.addEventListener('scroll', checkSticky, { passive: true });
   schedule.addEventListener('scroll', checkSticky, { passive: true });
   checkSticky();
+})();
+</script>
+
+<script>
+(function(){
+  var grid = document.querySelector('.grid');
+  if(!grid) return;
+  function autoScale(){
+    var vw = window.innerWidth;
+    var gw = grid.scrollWidth || 2450;
+    if(vw < gw){
+      var scale = vw / gw;
+      grid.style.transform = 'scale('+scale+')';
+      grid.style.transformOrigin = 'top left';
+      grid.style.width = (100/scale)+'%';
+    } else {
+      grid.style.transform = '';
+      grid.style.width = '';
+    }
+  }
+  autoScale();
+  window.addEventListener('resize', autoScale);
 })();
 </script>
 </body>
